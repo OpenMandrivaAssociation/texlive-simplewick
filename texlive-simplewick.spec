@@ -49,6 +49,7 @@ contractions above and below expressions.
 #- source
 %doc %{_texmfdistdir}/source/latex/simplewick/simplewick.dtx
 %doc %{_texmfdistdir}/source/latex/simplewick/simplewick.ins
+%doc %{_tlpkgobjdir}/*.tlpobj
 
 #-----------------------------------------------------------------------
 %prep
@@ -59,3 +60,5 @@ contractions above and below expressions.
 %install
 mkdir -p %{buildroot}%{_texmfdistdir}
 cp -fpar tex doc source %{buildroot}%{_texmfdistdir}
+mkdir -p %{buildroot}%{_tlpkgobjdir}
+cp -fpa tlpkg/tlpobj/*.tlpobj %{buildroot}%{_tlpkgobjdir}
