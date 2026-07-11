@@ -1,46 +1,22 @@
-Name:		texlive-simplewick
-Version:	15878
-Release:	2
+%global tl_name simplewick
+%global tl_revision 79618
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	1.2a
+Release:	%{tl_revision}.1
 Summary:	Simple Wick contractions
 Group:		Publishing
 URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/simplewick
-License:	GPL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/simplewick.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/simplewick.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/simplewick.source.r%{version}.tar.xz
+License:	gpl
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/simplewick.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/simplewick.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/simplewick.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+BuildSystem:	texlive
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-The package provides a simple means of drawing Wick
-contractions above and below expressions.
+The package provides a simple means of drawing Wick contractions above
+and below expressions.
 
-%post
-%{_sbindir}/texlive.post
-
-%postun
-if [ $1 -eq 0 ]; then
-	%{_sbindir}/texlive.post
-fi
-
-#-----------------------------------------------------------------------
-%files
-%{_texmfdistdir}/tex/latex/simplewick/simplewick.sty
-%doc %{_texmfdistdir}/doc/latex/simplewick/README
-%doc %{_texmfdistdir}/doc/latex/simplewick/simplewick.pdf
-#- source
-%doc %{_texmfdistdir}/source/latex/simplewick/simplewick.dtx
-%doc %{_texmfdistdir}/source/latex/simplewick/simplewick.ins
-
-#-----------------------------------------------------------------------
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -fpar tex doc source %{buildroot}%{_texmfdistdir}
